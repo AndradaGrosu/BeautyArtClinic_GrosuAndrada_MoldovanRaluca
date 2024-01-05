@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
 
 var app = builder.Build();
 

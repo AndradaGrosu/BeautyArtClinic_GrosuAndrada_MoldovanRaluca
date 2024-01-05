@@ -1,0 +1,55 @@
+﻿@page
+@model BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Servicii.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Serviciu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Serviciu.ID" />
+            <div class="form-group">
+                <label asp-for="Serviciu.DENUMIRE" class="control-label"></label>
+                <input asp-for="Serviciu.DENUMIRE" class="form-control" />
+                <span asp-validation-for="Serviciu.DENUMIRE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serviciu.DESCRIERE" class="control-label"></label>
+                <input asp-for="Serviciu.DESCRIERE" class="form-control" />
+                <span asp-validation-for="Serviciu.DESCRIERE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serviciu.PRET" class="control-label"></label>
+                <input asp-for="Serviciu.PRET" class="form-control" />
+                <span asp-validation-for="Serviciu.PRET" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serviciu.DepartamentID" class="control-label"></label>
+                <select asp-for="Serviciu.DepartamentID" class="form-control" asp-items="ViewBag.DepartamentID"></select>
+                <span asp-validation-for="Serviciu.DepartamentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serviciu.MedicID" class="control-label"></label>
+                <select asp-for="Serviciu.MedicID" class="form-control" asp-items="ViewBag.MedicID"></select>
+                <span asp-validation-for="Serviciu.MedicID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
