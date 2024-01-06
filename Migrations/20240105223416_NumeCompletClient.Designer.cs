@@ -4,6 +4,7 @@ using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Migrations
 {
     [DbContext(typeof(BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext))]
-    partial class BeautyArtClinic_GrosuAndrada_MoldovanRalucaContextModelSnapshot : ModelSnapshot
+    [Migration("20240105223416_NumeCompletClient")]
+    partial class NumeCompletClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,13 +35,14 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumeClient")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrenumeClient")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefon")
@@ -152,7 +156,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Migrations
             modelBuilder.Entity("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Medic", b =>
                 {
                     b.HasOne("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Departament", "Departament")
-                        .WithMany("Medici")
+                        .WithMany()
                         .HasForeignKey("DepartamentID");
 
                     b.Navigation("Departament");
@@ -182,7 +186,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Migrations
                         .IsRequired();
 
                     b.HasOne("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Medic", "Medic")
-                        .WithMany("Servicii")
+                        .WithMany()
                         .HasForeignKey("MedicID");
 
                     b.Navigation("Departament");
@@ -193,16 +197,6 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Migrations
             modelBuilder.Entity("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Client", b =>
                 {
                     b.Navigation("Programari");
-                });
-
-            modelBuilder.Entity("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Departament", b =>
-                {
-                    b.Navigation("Medici");
-                });
-
-            modelBuilder.Entity("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Medic", b =>
-                {
-                    b.Navigation("Servicii");
                 });
 
             modelBuilder.Entity("BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models.Serviciu", b =>

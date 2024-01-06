@@ -21,8 +21,8 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Programari
 
         public IActionResult OnGet()
         {
-        ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "ID");
-        ViewData["ServiciuID"] = new SelectList(_context.Serviciu, "ID", "ID");
+        ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "NumeClient");
+        ViewData["ServiciuID"] = new SelectList(_context.Serviciu, "ID", "DENUMIRE");
             return Page();
         }
 
@@ -32,10 +32,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Programari
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            
 
             _context.Programare.Add(Programare);
             await _context.SaveChangesAsync();

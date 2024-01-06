@@ -44,11 +44,6 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Medici
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Attach(Medic).State = EntityState.Modified;
 
             try

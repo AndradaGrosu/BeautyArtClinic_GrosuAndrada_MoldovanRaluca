@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Medici.IndexModel
 
 @{
@@ -23,15 +23,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Medic) {
+@foreach (var item in Model.Medic) 
+        {
+           
+
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NumeMedic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Departament.ID)
+                @Html.DisplayFor(modelItem => item.Departament.NumeDepartament)
             </td>
             <td>
+              
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>

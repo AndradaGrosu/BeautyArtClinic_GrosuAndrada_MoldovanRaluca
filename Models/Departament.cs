@@ -8,7 +8,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models
         [Display(Name = "DEPARTAMENT")]
         public string NumeDepartament { get; set; }
 
-        public ICollection<Serviciu> Servicii { get; set; }
-        public ICollection<Medic> Medici { get; set; }
+        // public ICollection<Serviciu> Servicii { get; set; }
+         public ICollection<Medic> Medici { get; set; }
     }
 }

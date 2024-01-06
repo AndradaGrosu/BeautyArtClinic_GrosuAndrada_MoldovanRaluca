@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Client[0].NumeClient)
+                @Html.DisplayNameFor(model => model.Client[0].NumeComplet)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Client[0].Email)
@@ -29,7 +29,7 @@
 @foreach (var item in Model.Client) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NumeClient)
+                @Html.DisplayFor(modelItem => item.NumeComplet)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -39,8 +39,8 @@
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
+                
             </td>
         </tr>
 }

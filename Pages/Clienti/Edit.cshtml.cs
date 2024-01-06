@@ -25,7 +25,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Clienti
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Client == null)
             {
                 return NotFound();
             }
@@ -71,7 +71,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Clienti
 
         private bool ClientExists(int id)
         {
-            return _context.Client.Any(e => e.ID == id);
+            return (_context.Client?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

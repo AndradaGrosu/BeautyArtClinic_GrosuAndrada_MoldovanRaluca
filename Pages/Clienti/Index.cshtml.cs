@@ -23,7 +23,10 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Clienti
 
         public async Task OnGetAsync()
         {
-            Client = await _context.Client.ToListAsync();
+            if (_context.Client != null)
+            {
+                Client = await _context.Client.ToListAsync();
+            }
         }
     }
 }

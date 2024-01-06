@@ -11,7 +11,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models
         public int? DepartamentID { get; set; }
         public Departament Departament { get; set; }
 
-        public ICollection<Serviciu> ServiciiOferite { get; set; }
-        public ICollection<Client> Clienti { get; set; }
+        public ICollection<Serviciu>Servicii { get; set; }
+
     }
 }

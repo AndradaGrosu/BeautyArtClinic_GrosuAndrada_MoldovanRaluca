@@ -32,11 +32,6 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Servicii
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Serviciu.Add(Serviciu);
             await _context.SaveChangesAsync();
 

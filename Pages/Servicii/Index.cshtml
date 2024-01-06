@@ -1,11 +1,11 @@
-﻿@page
+﻿@page "{id:int?}"
 @model BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Servicii.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
+<h1>Servicii medicale</h1>
 
-<h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,7 +14,9 @@
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort">
                 @Html.DisplayNameFor(model => model.Serviciu[0].DENUMIRE)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].DESCRIERE)
@@ -44,10 +46,10 @@
                 @Html.DisplayFor(modelItem => item.PRET)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Departament.ID)
+                @Html.DisplayFor(modelItem => item.Departament.NumeDepartament)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Medic.ID)
+                @Html.DisplayFor(modelItem => item.Medic.NumeMedic)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
