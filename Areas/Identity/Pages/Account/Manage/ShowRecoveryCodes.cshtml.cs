@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Data;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

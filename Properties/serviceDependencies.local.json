@@ -3,6 +3,10 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:ClinicIdentityContextConnection"
     }
   }
 }

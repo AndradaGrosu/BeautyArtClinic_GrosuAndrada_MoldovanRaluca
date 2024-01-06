@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Data;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,21 +26,22 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _signInManager;
-        private readonly UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userManager;
-        private readonly IUserStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userStore;
-        private readonly IUserEmailStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _emailStore;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        private readonly BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext _context;
+        private readonly BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data.BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext 
+            _context;
         public RegisterModel(
-            UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userManager,
-            IUserStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userStore,
-            SignInManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IUserStore<IdentityUser> userStore,
+            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext context)
+            BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data.BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -51,7 +52,6 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
             _context = context;
         }
         [BindProperty]
-
         public Client Client { get; set; }
 
     
@@ -123,24 +123,19 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
            _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             var user = CreateUser();
-            await _userStore.SetUserNameAsync(user, Input.Email,
-           CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, Input.Email,
-           CancellationToken.None);
-            var result = await _userManager.CreateAsync(user,
-           Input.Password);
+            await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+            await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+            var result = await _userManager.CreateAsync(user, Input.Password);
             Client.Email = Input.Email;
             _context.Client.Add(Client);
             await _context.SaveChangesAsync();
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");
-               
+                var role = await _userManager.AddToRoleAsync(user, "User");
                 var userId = await _userManager.GetUserIdAsync(user);
-                var code = await
-               _userManager.GenerateEmailConfirmationTokenAsync(user);
-                code =
-               WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                pageHandler: null,
@@ -152,10 +147,12 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
                    returnUrl = returnUrl
                },
                 protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", $"Please confirm your account by <a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicking here </ a >.");
+                await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+               
+                $"Please confirm your account by <a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicking here </ a >.");
            
 
- if(_userManager.Options.SignIn.RequireConfirmedAccount)
+        if (_userManager.Options.SignIn.RequireConfirmedAccount)
                 {
                     return RedirectToPage("RegisterConfirmation", new
                     {
@@ -163,7 +160,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
                         returnUrl = returnUrl
                     });
                 }
-                else
+        else
                 {
                     await _signInManager.SignInAsync(user,
                    isPersistent: false);
@@ -172,32 +169,31 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
 
             }
             return Page();
-
             // If we got this far, something failed, redisplay form
-          
+
         }
 
-        private BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser CreateUser()
+        private IdentityUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser>();
+                return Activator.CreateInstance<IdentityUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser)}'. " +
-                    $"Ensure that '{nameof(BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> GetEmailStore()
+        private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser>)_userStore;
+            return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
 }

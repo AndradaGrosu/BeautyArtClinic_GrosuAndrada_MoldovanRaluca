@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Threading.Tasks;
-using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Data;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,11 +12,11 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userManager,
+            UserManager<IdentityUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

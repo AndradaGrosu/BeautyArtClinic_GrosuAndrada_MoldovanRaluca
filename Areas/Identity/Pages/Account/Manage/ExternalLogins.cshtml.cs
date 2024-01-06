@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Data;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +17,14 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userManager;
-        private readonly SignInManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _signInManager;
-        private readonly IUserStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userStore;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IUserStore<IdentityUser> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userManager,
-            SignInManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> signInManager,
-            IUserStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userStore)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            IUserStore<IdentityUser> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -70,7 +70,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
                 .ToList();
 
             string passwordHash = null;
-            if (_userStore is IUserPasswordStore<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userPasswordStore)
+            if (_userStore is IUserPasswordStore<IdentityUser> userPasswordStore)
             {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }

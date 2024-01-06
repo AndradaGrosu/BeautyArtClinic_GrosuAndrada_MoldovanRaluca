@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Data;
+using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,9 +17,9 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<BeautyArtClinic_GrosuAndrada_MoldovanRalucaUser> userManager)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
         }

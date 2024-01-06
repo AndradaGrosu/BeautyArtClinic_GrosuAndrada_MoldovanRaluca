@@ -1,12 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
+
+options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
+builder.Services.AddDbContext<LibraryIdentityContext>(options =>
+
+options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+options.SignIn.RequireConfirmedAccount = true)
+ .AddEntityFrameworkStores<LibraryIdentityContext>();
+
+
+
+
+
+
+
+
+
+
 
 var app = builder.Build();
 
