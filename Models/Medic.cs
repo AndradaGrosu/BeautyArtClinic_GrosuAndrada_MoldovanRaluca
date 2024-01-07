@@ -5,7 +5,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models
     public class Medic
     {
         public int ID { get; set; }
-        [Display(Name = "NUME SPECIALIST")]
+        [Display(Name = "MEDIC SPECIALIST")]
         public string NumeMedic { get; set; }
 
         public int? DepartamentID { get; set; }

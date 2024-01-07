@@ -10,6 +10,7 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models
         public string DENUMIRE { get; set; }
         public string DESCRIERE { get; set; }
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0.01, 500)]
         [Display(Name = "PRET (lei)")]
         public decimal PRET { get; set; }
 

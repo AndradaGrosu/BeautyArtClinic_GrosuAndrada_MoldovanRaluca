@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Servicii
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data.BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext _context;

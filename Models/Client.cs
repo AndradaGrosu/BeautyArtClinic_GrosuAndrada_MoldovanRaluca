@@ -6,9 +6,11 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models
     {
         public int ID { get; set; }
         [RegularExpression(@"^[A-Z]+[a-z\s]*$")]
+        [StringLength(30, MinimumLength = 3)]
         [Display(Name = "Nume")]
         public string? NumeClient { get; set; }
         [RegularExpression(@"^[A-Z]+[a-z\s]*$", ErrorMessage = "Prenumele trebuie sa inceapa cu majuscula (ex. Ana sau Ana Maria sau AnaMaria")]
+        [StringLength(30, MinimumLength = 3)]
         [Display(Name = "Prenume")]
         public string? PrenumeClient { get; set; }
         [StringLength(100)]

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Departamente
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data.BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext _context;
@@ -25,12 +27,12 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Departamente
         }
 
         [BindProperty]
-        public Departament Departament { get; set; } 
+        public Departament Departament { get; set; } = default!;
 
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _context.Departament == null || Departament ==null)
             {
                 return Page();
             }

@@ -5,7 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Detalii Serviciu</h2>
 
 <div>
     <h4>Serviciu</h4>
@@ -30,16 +30,16 @@
             @Html.DisplayFor(model => model.Serviciu.PRET)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serviciu.Departament)
+            @Html.DisplayNameFor(model => model.Serviciu.Departament.NumeDepartament)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serviciu.Departament.ID)
+            @Html.DisplayFor(model => model.Serviciu.Departament.NumeDepartament)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serviciu.Medic)
+            @Html.DisplayNameFor(model => model.Serviciu.Medic.NumeMedic)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serviciu.Medic.ID)
+            @Html.DisplayFor(model => model.Serviciu.Medic.NumeMedic)
         </dd>
     </dl>
 </div>

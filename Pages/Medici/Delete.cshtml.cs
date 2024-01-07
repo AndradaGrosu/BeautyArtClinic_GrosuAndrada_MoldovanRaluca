@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Pages.Medici
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data.BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext _context;

@@ -4,8 +4,20 @@ using BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Data;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+   policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Servicii");
+    options.Conventions.AllowAnonymousToPage("/Servicii/Index");
+    options.Conventions.AllowAnonymousToPage("/Servicii/Details");
+    options.Conventions.AuthorizeFolder("/Clienti", "AdminPolicy");
+});
 builder.Services.AddDbContext<BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext>(options =>
 
 options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
@@ -14,16 +26,8 @@ builder.Services.AddDbContext<LibraryIdentityContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext") ?? throw new InvalidOperationException("Connection string 'BeautyArtClinic_GrosuAndrada_MoldovanRalucaContext' not found.")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 options.SignIn.RequireConfirmedAccount = true)
+ .AddRoles<IdentityRole>()
  .AddEntityFrameworkStores<LibraryIdentityContext>();
-
-
-
-
-
-
-
-
-
 
 
 var app = builder.Build();
