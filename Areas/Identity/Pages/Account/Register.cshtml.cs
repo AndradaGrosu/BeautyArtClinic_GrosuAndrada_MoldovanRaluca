@@ -79,7 +79,8 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public class InputModel
-        {
+        { 
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -127,8 +128,10 @@ namespace BeautyArtClinic_GrosuAndrada_MoldovanRaluca.Areas.Identity.Pages.Accou
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, Input.Password);
             Client.Email = Input.Email;
+
             _context.Client.Add(Client);
             await _context.SaveChangesAsync();
+
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");

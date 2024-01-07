@@ -12,7 +12,23 @@
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-          
+            <!-- Add new input fields for NumeClient, Telefon, and PrenumeClient -->
+            <div class="form-floating mb-3">
+                <input asp-for="Client.NumeClient" class="form-control" aria-required="true" placeholder="Your last name" />
+                <label asp-for="Client.NumeClient">Last Name</label>
+                <span asp-validation-for="Client.NumeClient" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Client.PrenumeClient" class="form-control" aria-required="true" placeholder="Your first name" />
+                <label asp-for="Client.PrenumeClient">First Name</label>
+                <span asp-validation-for="Client.PrenumeClient" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Client.Telefon" class="form-control" aria-required="true" placeholder="Your phone number" />
+                <label asp-for="Client.Telefon">Phone Number</label>
+                <span asp-validation-for="Client.Telefon" class="text-danger"></span>
+            </div>
+
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
